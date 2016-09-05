@@ -1,0 +1,5 @@
+server:
+  host: "{{ Secret "secret/apps/example/config" "host" }}"
+  port: {{ Secret "secret/apps/example/config" "port" }}
+
+api_key: "{{ Secret "secret/apps/global/keys" "example_key" }}"
