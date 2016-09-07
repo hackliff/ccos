@@ -1,0 +1,15 @@
+{
+  "Datacenter": "dc1",
+  "Node": "mailgun",
+  "Address": "http://www.mailgun.com",
+  "Service": {
+    "Service": "email",
+    "Port": 80
+  },
+  "Check": {
+    "Name": "mailgun api",
+    "http": "www.status.mailgun.com",
+    "interval": "360s",
+    "timeout": "1s"
+  }
+}

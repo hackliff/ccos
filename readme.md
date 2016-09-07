@@ -39,3 +39,19 @@ So in case you write an app (say `example.py`) that loads `yaml` on
 ./example.py
 {'server': {'host': 'localhost', 'port': 3000}, 'api_key': 'qwerty'}
 ```
+
+## Service discovery
+
+```Bash
+$ docker run \
+  --name consul \
+  --hostname server-1 \
+  -p 8301:8301 -p 8400:8400 -p 8500:8500 -p 8600:8600 -p 53:53 \
+  consul:v0.6.4 agent -server -bootstrap-expect 1 -client 0.0.0.0 -advertise=172.17.0.2
+
+$ # start a simple backend for various load balancing demos
+$ docker run -d --name hello -p 8080:80 nginxdemos/hello
+
+$ curl -XPUT -d@services/hello.json $CONSUL_ADDR/v1/catalog/register
+$ curl $CONSUL_ADDR/v1/catalog/nodes
+```
